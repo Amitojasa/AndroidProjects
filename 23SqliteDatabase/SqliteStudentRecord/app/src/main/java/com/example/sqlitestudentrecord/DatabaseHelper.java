@@ -1,8 +1,11 @@
 package com.example.sqlitestudentrecord;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.TableLayout;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -32,4 +35,73 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME);
         onCreate(sqLiteDatabase);
     }
+
+    public boolean insertData(String name,String email,String courseCount){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(COL_2,name);
+        contentValues.put(COL_3,email);
+        contentValues.put(COL_4,courseCount);
+
+        long result = db.insert(TABLE_NAME, null,contentValues);
+
+        if(result==-1){
+
+            //something wrong
+
+            return false;
+
+        }else{
+
+            return true;
+        }
+
+
+    }
+
+    public boolean updateData(String id,String name,String email,String courseCount){
+        SQLiteDatabase db= this.getWritableDatabase();
+        ContentValues contentValues= new ContentValues();
+
+        contentValues.put(COL_1,id);
+        contentValues.put(COL_2,name);
+        contentValues.put(COL_3,email);
+        contentValues.put(COL_4,courseCount);
+
+        db.update(TABLE_NAME,contentValues, "ID = ?",new String[]{id});
+        return true;
+
+    }
+
+    public Cursor getData(String id){
+
+        SQLiteDatabase db= this.getWritableDatabase();
+
+        String query = "SELECT * FROM "+TABLE_NAME+" WHERE ID= '"+id+"'";
+
+        Cursor cursor = db.rawQuery(query,null);
+
+        return cursor;
+
+    }
+
+
+    public Integer deleteData(String id){
+        SQLiteDatabase db= this.getWritableDatabase();
+
+        return db.delete(TABLE_NAME,"ID=?",new String[]{id});
+    }
+
+    public Cursor getAllData(){
+
+        SQLiteDatabase db=this.getWritableDatabase();
+        Cursor cursor=db.rawQuery("SELECT * FROM "+TABLE_NAME,null);
+
+        return cursor;
+
+    }
+
+
 }
