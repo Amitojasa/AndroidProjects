@@ -3,6 +3,7 @@ package com.example.sqlitestudentrecord;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -39,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         showMessage("test","Testing done");
 
         AddData();
+        GetData();
+        ViewAll();
 
     }
 
@@ -63,6 +66,59 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void GetData(){
+
+        buttonGetData.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                String id = editTextid.getText().toString();
+
+                if(id.equals(String.valueOf(""))){
+                    editTextid.setError("Enter Id");
+                    return;
+                }
+
+                Cursor cursor = myDB.getData(id);
+                String data=null;
+
+                if(cursor.moveToNext()){
+                    data="ID: "+cursor.getString(0)+"\n"+
+                            "Name: "+cursor.getString(1)+"\n"+
+                            "Email: "+cursor.getString(2)+"\n"+
+                            "Course Count: "+cursor.getString(3)+"\n";
+                }
+
+                showMessage("Data",data);
+
+            }
+        });
+
+    }
+
+    public void ViewAll(){
+
+        buttonViewAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Cursor cursor=myDB.getAllData();
+                StringBuffer data= new StringBuffer();
+
+                if(cursor.getCount()==0){
+                    showMessage("Error","Nothing found in DB");
+                    return;
+                }
+                while(cursor.moveToNext()){
+                        data.append("ID: "+cursor.getString(0)+"\n"+
+                                "Name: "+cursor.getString(1)+"\n"+
+                                "Email: "+cursor.getString(2)+"\n"+
+                                "Course Count: "+cursor.getString(3)+"\n\n");
+                }
+                showMessage("All data",data.toString());
+            }
+        });
+
+    }
 
 
     private void showMessage(String title,String message){
