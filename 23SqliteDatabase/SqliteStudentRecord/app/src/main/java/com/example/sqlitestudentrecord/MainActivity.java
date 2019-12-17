@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         AddData();
         GetData();
         ViewAll();
+        UpdataData();
+        DeleteData();
 
     }
 
@@ -120,6 +122,37 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void UpdataData(){
+        buttonUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                boolean isUpdate = myDB.updateData(editTextid.getText().toString(),editName.getText().toString(),editEmail.getText().toString(),editCC.getText().toString());
+
+                if(isUpdate==true){
+                    Toast.makeText(MainActivity.this,"Updated Successfully",Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(MainActivity.this,"Sorry",Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+        });
+    }
+
+    public void DeleteData(){
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Integer deletedRow= myDB.deleteData(editTextid.getText().toString());
+                if(deletedRow>0){
+                    Toast.makeText(MainActivity.this,"Deleted",Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(MainActivity.this,"Sorry",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
 
     private void showMessage(String title,String message){
         AlertDialog.Builder builder= new AlertDialog.Builder(this);
