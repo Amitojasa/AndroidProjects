@@ -1,0 +1,23 @@
+{
+  "courseCount": 3,
+  "email": "as@gmail.com",
+  "course": {
+    "description": "Bootcamp",
+    "name": "Java"
+  },
+  "video": [
+    {
+      "duration": 4,
+      "name": "Intro"
+    },
+    {
+      "duration": 8,
+      "name": "Exercise"
+    },
+    {
+      "duration": 12,
+      "name": "End"
+    }
+  ],
+  "name": "Amitoj"
+}
