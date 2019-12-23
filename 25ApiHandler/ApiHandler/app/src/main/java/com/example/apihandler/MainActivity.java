@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         //requestQueue = Volley.newRequestQueue(this);
 
-        requestQueue = VolleySingleton.getInstance(this).getRequestQueue();
+        requestQueue = VolleySingleton.getInstance(this).getRequestQueue(); 
 
 
         button.setOnClickListener(new View.OnClickListener() {
