@@ -24,10 +24,10 @@ public class MainActivity extends AppCompatActivity {
     Button button;
     EditText city;
 
-    //http://api.openweathermap.org/data/2.5/weather?q=bathinda&appid=107ba2cce4370c8d7b00270b7c0681c9
+    
 
     String baseUrl= "https://api.openweathermap.org/data/2.5/weather?q=";
-    String api="&appid=107ba2cce4370c8d7b00270b7c0681c9";
+    String api="enter your api" ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
