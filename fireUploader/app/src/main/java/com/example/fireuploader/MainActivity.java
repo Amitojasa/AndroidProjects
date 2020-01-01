@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
             progressDialog.setMessage("Uploading.....");
             Uri uri= data.getData();
+            progressDialog.show();
 
             imageView.setImageURI(uri);
 
