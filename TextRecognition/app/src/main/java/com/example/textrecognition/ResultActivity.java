@@ -24,6 +24,7 @@ public class ResultActivity extends AppCompatActivity {
         backButton  = findViewById(R.id.back_button);
         resultText = getIntent().getStringExtra(LcoTextRecognization.RESULT_TEXT);
 
+        resultTextView.setText(resultText);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
